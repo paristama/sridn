@@ -1,0 +1,13 @@
+{
+  "name": "sridn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "longpoll.js",
+  "type": "module",
+  "scripts": {
+    "build": "node longpoll.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

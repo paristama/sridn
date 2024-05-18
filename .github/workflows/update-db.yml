@@ -1,0 +1,30 @@
+name: Resources
+
+on:
+  push:
+  schedule:
+    - cron: "* * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm run build --if-present
+      - name: Update files on GitHub
+        uses: test-room-7/action-update-file@v1
+        with:
+          file-path: liveDB.json
+          commit-msg: Update livestream data
+          github-token: ${{ secrets.GH_TOKEN }}
+          branch: main
